@@ -66,5 +66,6 @@ function updateColourBar() {
   background-color: none;
   position: absolute;
   bottom: 80px;
+  user-select: none;
 }
 </style>
