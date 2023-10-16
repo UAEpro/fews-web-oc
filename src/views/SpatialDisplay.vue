@@ -7,9 +7,7 @@
     <MapComponent>
       <animated-mapbox-layer :layer="layerOptions" />
     </MapComponent>
-    <div class="colourbar">
-      <ColourBar :colourMap="legend" />
-    </div>
+    <ColourBar :colourMap="legend" />
     <DateTimeSlider
       v-model:selectedDate="currentTime"
       :dates="times ?? []"
@@ -196,14 +194,6 @@ function loadLayersBbox(layers: Layer[]): void {
 </script>
 
 <style scoped>
-.colourbar {
-  font-size: 0.825em;
-  z-index: 1000;
-  background-color: none;
-  position: absolute;
-  bottom: 80px;
-}
-
 .container {
   display: flex;
   flex-direction: column;

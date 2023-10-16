@@ -1,5 +1,5 @@
 <template>
-  <div id="legend" :class="isVisible ? 'invisible' : ''">
+  <div class="colourbar" id="legend" :class="isVisible ? 'invisible' : ''">
     <svg id="colourbar" width="120" height="320" style="fill: none"></svg>
   </div>
 </template>
@@ -54,5 +54,13 @@ function updateColourBar() {
 <style scoped>
 #legend .invisible {
   display: none;
+}
+
+.colourbar {
+  font-size: 0.825em;
+  z-index: 1000;
+  background-color: none;
+  position: absolute;
+  bottom: 80px;
 }
 </style>
