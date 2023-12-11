@@ -62,7 +62,8 @@ const useConfigStore = defineStore('config', {
   },
   getters: {
     getComponentByType: (state) => {
-      return (type: string) => Object.values(state.components).find((c) => c.type === type)
+      return (type: string) =>
+        Object.values(state.components).find((c) => c.type === type)
     },
 
     activeComponents: (state) => {
