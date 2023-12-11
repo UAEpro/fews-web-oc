@@ -35,12 +35,17 @@
       divided
       density="compact"
       class="ma-2"
-      ><v-btn v-for="item in nodeButtons" :to="item.to">{{
-        item.name
-      }}</v-btn></v-btn-toggle
+      ><v-btn v-for="item in nodeButtons" :to="item.to">{{ item.name }}</v-btn>
+    </v-btn-toggle>
+    <v-btn-toggle
+      v-if="displayTabs.length > 0"
+      v-model="activeTab"
+      variant="tonal"
+      divided
+      density="compact"
+      class="ma-2"
     >
-    <v-tabs v-if="displayTabs.length > 1" v-model="activeTab" class="d-flex flex-shrink-0">
-      <v-tab
+      <v-btn
         v-for="tab in displayTabs"
         :key="tab.id"
         :href="tab.href"
@@ -50,8 +55,8 @@
       >
         <v-icon>{{ tab.icon }}</v-icon>
         {{ tab.title }}
-      </v-tab>
-    </v-tabs>
+      </v-btn>
+    </v-btn-toggle>
     <v-btn
       v-if="externalLink"
       :href="externalLink"
@@ -167,7 +172,7 @@ function recursiveUpdateNode(nodes: TopologyNode[], skipLeaves = false) {
           params: {
             nodeId: node.id,
           },
-        }
+        },
       }
       if (node.topologyNodes) {
         const items = recursiveUpdateNode(node.topologyNodes, skipLeaves)
@@ -182,26 +187,24 @@ function recursiveUpdateNode(nodes: TopologyNode[], skipLeaves = false) {
     })
 }
 
-
 function nodeButtonItems(nodes: TopologyNode[]) {
   return nodes
     .filter((node) => topologyNodeIsVisible(node))
     .map((node) => {
-      const result: ColumnItem ={
+      const result: ColumnItem = {
         id: node.id,
         name: node.name,
         icon: getIcon(node),
         to: {
           name: 'TopologyDisplay',
           params: {
-            nodeId: node.id
-          }
-        }
+            nodeId: node.id,
+          },
+        },
       }
       return result
     })
 }
-
 
 function getIcon(node: TopologyNode): string | undefined {
   if (node.url && !node.topologyNodes && !node.displayGroups) return 'mdi-share'
