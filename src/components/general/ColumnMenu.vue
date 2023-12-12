@@ -36,7 +36,7 @@
           >
             <v-list-item-title>{{ child.name }}</v-list-item-title>
             <template v-slot:append>
-              <v-icon v-if="child.children">mdi-chevron-right</v-icon>
+              <v-icon v-if="child.children?.length">mdi-chevron-right</v-icon>
               <v-icon v-else-if="child.icon" small>{{ child.icon }}</v-icon>
             </template>
           </v-list-item>
@@ -109,7 +109,7 @@ function onTitleClick(): void {
 
 function onItemClick(event: Event, item: ColumnItem): void {
   const s = stack.value
-  if (item.children) {
+  if (item.children?.length) {
     s.push(item)
     path.push(item.id)
     emit('update:open', [...path, ...props.open])
@@ -135,7 +135,7 @@ function updateStack(): void {
 function recursiveFind(stack: ColumnItem[], id: string): boolean {
   const item = stack[stack.length - 1]
   if (item.id === id) return true
-  if (item.children !== undefined) {
+  if (item.children?.length) {
     for (const child of item.children) {
       stack.push(child)
       if (recursiveFind(stack, id)) {
