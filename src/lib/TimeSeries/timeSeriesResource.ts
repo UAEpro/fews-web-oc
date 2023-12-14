@@ -5,7 +5,7 @@ export class SeriesResource {
   @JsonProperty()
   type: SeriesResourceType
 
-  constructor(type: SeriesResourceType) {
+  constructor (type: SeriesResourceType) {
     this.type = type
   }
 }
@@ -18,7 +18,7 @@ export class SeriesRequest extends SeriesResource {
   @JsonProperty()
   provider: string
 
-  constructor(provider: string, filter: any) {
+  constructor (provider: string, filter: any) {
     super(SeriesResourceType.DdApiRequest)
     this.provider = provider
     this.filter = filter
@@ -33,7 +33,7 @@ export class SeriesUrlRequest extends SeriesResource {
   @JsonProperty()
   provider: string
 
-  constructor(provider: string, url: string) {
+  constructor (provider: string, url: string) {
     super(SeriesResourceType.UrlRequest)
     this.provider = provider
     this.url = url
@@ -43,31 +43,30 @@ export class SeriesUrlRequest extends SeriesResource {
 @JsonObject()
 export class SeriesDerived extends SeriesResource {
   @JsonProperty()
-  factor?: number
+  factor?: number;
 
   @JsonProperty()
-  offset?: number
+  offset?: number;
 
   @JsonProperty()
-  operator!: string
+  operator!: string;
 
   @JsonProperty()
-  operationType: SeriesOperationType
+  operationType: SeriesOperationType;
 
   @JsonProperty()
   dataResources: string[]
 
-  constructor(
+  constructor (
     operationType = SeriesOperationType.FactorOffset,
-    dataResources: string[] = [],
-  ) {
+    dataResources: string[] = []) {
     super(SeriesResourceType.Derived)
     this.operationType = operationType
     this.dataResources = dataResources
     this.setOperator(operationType)
   }
 
-  setOperator(operationType: SeriesOperationType) {
+  setOperator (operationType: SeriesOperationType) {
     switch (operationType) {
       case SeriesOperationType.FactorOffset:
         this.operator = 'applyFactorOffset'
